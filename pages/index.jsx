@@ -232,13 +232,14 @@ export default function Home() {
 
 		// Create an event handler function for when someone sends
 		// us a new memo.
-		const onNewMemo = (from, timestamp, name, message) => {
-			console.log("Memo received: ", from, timestamp, name, message);
+		const onNewMemo = (from, timestamp, coffeeSize, name, message) => {
+			console.log("Memo received: ", from, timestamp, coffeeSize, name, message);
 			setMemos((prevState) => [
 				...prevState,
 				{
 					address: from,
 					timestamp: new Date(timestamp * 1000),
+					coffeeSize: coffeeSize,
 					message,
 					name,
 				},
@@ -321,14 +322,15 @@ export default function Home() {
 			{currentAccount &&
 				memos.map((memo, idx) => {
 					return (
-						<Card key={idx} style={{ width: "400px", marginBottom: "20px" }} css={{ mw: "800px" }}>
+						<Card key={idx} style={{ width: "500px", marginBottom: "20px" }} css={{ mw: "800px" }}>
 							<Card.Header>
 								<Grid.Container>
-									<Grid xs={6}>
+									<Grid xs={12}>
 										<Text>From: {memo.name}</Text>
 									</Grid>
-									<Grid xs={6}>
-										<Text>Timestamp: {memo.timestamp.toString()}</Text>
+									<Grid xs={12}>
+										{/* <Text>Timestamp: {new Date(memo.timestamp * 1000)}</Text> */}
+										<Text>Time: {new Date(memo.timestamp * 1000).toString()}</Text>
 									</Grid>
 									<Grid>
 										<Text>Size: {memo.coffeeSize}</Text>
